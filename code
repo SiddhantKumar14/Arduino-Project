@@ -8,6 +8,7 @@ int pirSensor = 2; // sensor pin
 int pirState = 0; // pirSensor status
 int crossTime = 15000; // time for pedestrians to cross
 unsigned long changeTime = 0; // time last pedestrian cycle completed
+
 void setup() {
 pinMode(trafRed, OUTPUT);
 pinMode(trafYellow, OUTPUT);
@@ -15,7 +16,7 @@ pinMode(trafGreen, OUTPUT);
 pinMode(pedRed, OUTPUT);
 pinMode(pedGreen, OUTPUT);
 pinMode(pirSensor, INPUT); // sensor on pin 2
-48}
+}
 void loop() {
 pirState = digitalRead(pirSensor);
 /* check if sensor is triggered and it is over 20 seconds since last trigger */
@@ -24,8 +25,8 @@ if (pirState == 1 && (millis() - changeTime)> 20000)
 changeLights();
 }else
 {
-digitalWrite (trafGreen, HIGH);
-digitalWrite (pedRed, HIGH);}
+ digitalWrite (trafGreen, HIGH);
+ digitalWrite (pedRed, HIGH);}
 }
 void changeLights() {
 digitalWrite(trafGreen, LOW); // green off
@@ -33,7 +34,7 @@ digitalWrite(trafYellow, HIGH); // yellow on
 delay(3000); // wait 3 seconds
 digitalWrite(trafYellow, LOW); // yellow off
 digitalWrite(trafRed, HIGH); // red on
-49delay(3000); // wait 3 second till its safe
+delay(3000); // wait 3 second till its safe
 digitalWrite(pedRed, LOW); // ped red off
 digitalWrite(pedGreen, HIGH); // ped green on
 delay(crossTime); // wait for preset time period
@@ -50,9 +51,10 @@ delay(3000);
 digitalWrite(trafRed, LOW); // red off
 digitalWrite(trafGreen, HIGH);
 // record the time since last change of lights
-50changeTime = millis();
+changeTime = millis();
 // then return to the main program loop
 }
+
 B. LCD Sketch:
 #include <LiquidCrystal.h> //include library code
 LiquidCrystal lcd1(3,5,6,7,8,9);//initialise library with numbers of interface pins
